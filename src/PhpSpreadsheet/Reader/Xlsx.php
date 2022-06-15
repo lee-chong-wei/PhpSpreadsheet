@@ -810,9 +810,9 @@ class Xlsx extends BaseReader
                                                 } else {
                                                     // Formula
                                                     $this->castToFormula($c, $r, $cellDataType, $value, $calculatedValue, $sharedFormulas, 'castToBoolean');
-                                                    if (isset($c->f['t'])) {
-                                                        $att = $c->f;
-                                                        $docSheet->getCell($r)->setFormulaAttributes($att);
+                                                    $attributes = self::getAttributes($c->f);
+                                                    if (isset($attributes['t'])) {
+                                                        $docSheet->getCell($r)->setFormulaAttributes(['t' => (string) $attributes['t']]);
                                                     }
                                                 }
 
@@ -840,9 +840,9 @@ class Xlsx extends BaseReader
                                                 } else {
                                                     // Formula
                                                     $this->castToFormula($c, $r, $cellDataType, $value, $calculatedValue, $sharedFormulas, 'castToString');
-                                                    if (isset($c->f['t'])) {
-                                                        $attributes = $c->f['t'];
-                                                        $docSheet->getCell($r)->setFormulaAttributes(['t' => (string) $attributes]);
+                                                    $attributes = self::getAttributes($c->f);
+                                                    if (isset($attributes['t'])) {
+                                                        $docSheet->getCell($r)->setFormulaAttributes(['t' => (string) $attributes['t']]);
                                                     }
                                                 }
 
